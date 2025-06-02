@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.511.0",
     "next": "15.3.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -24,6 +29,7 @@
     "eslint-config-next": "15.3.3",
     "eslint-plugin-react-hooks": "^5.2.0",
     "tailwindcss": "^4",
+    "tw-animate-css": "^1.3.3",
     "typescript": "^5"
   }
 }

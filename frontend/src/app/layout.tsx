@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Eczar } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ecazar = Eczar({
   subsets: ["latin"],
 });
 
@@ -24,9 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${ecazar.className} antialiased`}>
+        <div className="w-full h-[100svh] -z-10 fixed top-0 left-0 ">
+          <Image
+            className="object-cover"
+            src="/backdrop.png"
+            alt="Backdrop"
+            fill
+          />
+        </div>
         {children}
       </body>
     </html>
