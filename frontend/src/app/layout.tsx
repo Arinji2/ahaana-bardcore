@@ -19,16 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${ecazar.className} antialiased`}>
-        <div className="w-full h-[100svh] -z-10 fixed top-0 left-0 ">
-          <Image
-            className="object-cover"
-            src="/backdrop.png"
-            alt="Backdrop"
-            fill
-          />
-        </div>
-        {children}
+      <body
+        className={`${ecazar.className} antialiased bg-[url('/backdrop.png')] bg-repeat w-full min-h-screen`}
+        style={{ backgroundSize: "auto" }}
+      >
+        <div className="w-full min-h-screen max-w-pageMax">{children}</div>
       </body>
     </html>
   );
