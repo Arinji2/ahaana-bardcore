@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function About() {
   return (
     <div className="w-full  gap-10 relative flex flex-col items-start px-4 justify-center">
-      <div className="w-40 md:w-52 aspect-square absolute -top-20 right-4 md:right-10">
+      <div className="w-40 md:w-60 aspect-square absolute -top-20 right-4 md:right-20">
         <Image src="/about.png" fill alt="About" />
       </div>
       <h2 className="text-4xl font-bold tracking-wider text-primary">ABOUT</h2>
