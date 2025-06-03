@@ -18,9 +18,9 @@ export default function About() {
         </div>
 
         <p className="text-3xl tracking-wider w-full md:w-[55%] text-secondary">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi.
-          Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla.
-          Pellentesque sit amet sapien fringilla
+          {
+            "Hey there! I'm a college student on a musical adventure. Pop culture's grown on me but I don't stick to one genre. Its just me and my guitars against the world- unless you're down to join the ride. Welcome to my corner! :)"
+          }
         </p>
       </div>
     </div>
