@@ -56,7 +56,6 @@ func driveProxyHandler(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	// Make request to Google Drive
 	driveURL := fmt.Sprintf("https://drive.google.com/uc?export=download&id=%s", fileID)
 	req, err := http.NewRequest("GET", driveURL, nil)
 	if err != nil {
