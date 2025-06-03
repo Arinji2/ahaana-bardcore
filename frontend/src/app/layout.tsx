@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Eczar } from "next/font/google";
 import "./globals.css";
+import { MusicProvider } from "@/components/music-context.client";
 
 const ecazar = Eczar({
   subsets: ["latin"],
@@ -22,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ecazar.className} antialiased bg-[url('/backdrop.png')] flex flex-col items-center justify-center bg-repeat w-full min-h-screen`}
+        className={`${ecazar.className} tracking-wider antialiased bg-[url('/backdrop.png')] flex flex-col items-center justify-center bg-repeat w-full min-h-screen`}
         style={{ backgroundSize: "auto" }}
       >
-        <div className="w-full min-h-screen max-w-pageMax">{children}</div>
+        <MusicProvider>
+          <div className="w-full min-h-screen max-w-pageMax">{children}</div>
+        </MusicProvider>
       </body>
     </html>
   );
