@@ -6,11 +6,31 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func driveProxyHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	referer := r.Header.Get("Referer")
+	allowedOrigin := os.Getenv("FRONTEND_URL")
+
+	if referer == "" || !strings.HasPrefix(referer, allowedOrigin) {
+		http.Error(w, "Forbidden: invalid referer", http.StatusForbidden)
+		return
+	}
+
+	w.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
+	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
+	w.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
@@ -20,6 +40,7 @@ func driveProxyHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fileID := r.URL.Query().Get("fileID")
+	fmt.Println(fileID)
 	if fileID == "" {
 		http.Error(w, "fileID parameter is required", http.StatusBadRequest)
 		return
@@ -90,6 +111,14 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
+	}
+
+	allowedOrigin := os.Getenv("FRONTEND_URL")
+	if allowedOrigin == "" {
+		allowedOrigin = "http://localhost:3000"
+		fmt.Println("No allowed origin specified, defaulting to", allowedOrigin)
+	} else {
+		fmt.Println("Allowed origin:", allowedOrigin)
 	}
 
 	http.HandleFunc("/proxy", driveProxyHandler)
