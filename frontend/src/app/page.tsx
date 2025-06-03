@@ -1,9 +1,11 @@
+import About from "./about";
 import Hero from "./hero";
 
 export default function Home() {
   return (
-    <div className=" flex flex-col items-center justify-start py-10">
+    <div className=" gap-20 flex flex-col items-center justify-start py-10">
       <Hero />
+      <About />
     </div>
   );
 }
