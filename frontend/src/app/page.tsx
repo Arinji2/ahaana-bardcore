@@ -1,4 +1,5 @@
 import About from "./about";
+import Contact from "./contact.client";
 import Hero from "./hero";
 import FeaturedRelease from "./release";
 import Work from "./work";
@@ -10,6 +11,7 @@ export default function Home() {
       <About />
       <FeaturedRelease />
       <Work />
+      <Contact />
     </div>
   );
 }
