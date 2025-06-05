@@ -1,6 +1,7 @@
 import About from "./about";
 import Hero from "./hero";
 import FeaturedRelease from "./release";
+import Work from "./work";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <About />
       <FeaturedRelease />
+      <Work />
     </div>
   );
 }
