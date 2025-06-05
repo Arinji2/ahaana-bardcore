@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Loader2, Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -6,9 +7,11 @@ import { useMusic } from "../music-context.client";
 export function MusicCardClient({
   itemID,
   musicID,
+  variant = "base",
 }: {
   itemID: string;
   musicID: string;
+  variant?: "sm" | "base" | "lg";
 }) {
   const { currentID, setCurrentID } = useMusic();
   const isPlaying = currentID === itemID;
@@ -47,24 +50,15 @@ export function MusicCardClient({
     const audio = audioRef.current;
     if (!audio) return;
 
-    const handleCanPlay = () => {
-      setIsLoading(false);
-    };
-
-    const handleLoadStart = () => {
-      setIsLoading(true);
-    };
-
+    const handleCanPlay = () => setIsLoading(false);
+    const handleLoadStart = () => setIsLoading(true);
     const handleError = (e: unknown) => {
       console.error("Audio error:", e);
       setIsLoading(false);
       setCurrentID(null);
       setAudioLoaded(false);
     };
-
-    const handleEnded = () => {
-      setCurrentID(null);
-    };
+    const handleEnded = () => setCurrentID(null);
 
     audio.addEventListener("canplay", handleCanPlay);
     audio.addEventListener("loadstart", handleLoadStart);
@@ -96,16 +90,38 @@ export function MusicCardClient({
     }
   };
 
+  const sizeClasses = {
+    sm: {
+      button: "size-14",
+      icon: "size-8",
+      spinner: "size-8",
+    },
+    base: {
+      button: "size-20",
+      icon: "size-10",
+      spinner: "size-10",
+    },
+    lg: {
+      button: "size-28",
+      icon: "size-12",
+      spinner: "size-12",
+    },
+  }[variant];
+
   return (
     <button
       aria-label="Play or pause music"
       disabled={isLoading}
       onClick={handleClick}
-      className="size-20 border-2 border-black rounded-full relative flex flex-col overflow-hidden items-center justify-center bg-primary-bright"
+      className={cn(
+        "border-2 border-black rounded-full relative flex flex-col overflow-hidden items-center justify-center bg-primary-bright",
+        sizeClasses.button,
+      )}
     >
       <Loader2
         className={cn(
-          "transition-all ease-in-out duration-300 absolute size-10 animate-spin",
+          "transition-all ease-in-out duration-300 absolute animate-spin",
+          sizeClasses.spinner,
           {
             "-translate-y-20": !isLoading,
             "translate-y-0": isLoading,
@@ -125,9 +141,9 @@ export function MusicCardClient({
         )}
       >
         {isPlaying ? (
-          <Pause className="size-10" />
+          <Pause className={sizeClasses.icon} />
         ) : (
-          <Play className="size-10" />
+          <Play className={sizeClasses.icon} />
         )}
       </div>
     </button>
