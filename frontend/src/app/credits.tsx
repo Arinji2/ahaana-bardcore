@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Credits() {
   return (
@@ -9,9 +10,11 @@ export default function Credits() {
           <p className="text-2xl font-medium text-center tracking-wider">
             Website designed and built by Arinji
           </p>
-          <Button className="text-lg" size={"lg"}>
-            Check Out My Portfolio
-          </Button>
+          <Link href={"https://arinji.com"}>
+            <Button className="text-lg" size={"lg"}>
+              Check Out My Portfolio
+            </Button>
+          </Link>
         </div>
         <div className="w-full md:w-[30%] md:h-[250px] flex flex-col items-center justify-between gap-5 md:gap-10 ">
           <h2 className="text-6xl font-bold text-primary">CREDITS</h2>
@@ -20,9 +23,11 @@ export default function Credits() {
             <p className="text-2xl font-medium tracking-wider">
               Assets from Bayeux
             </p>
-            <Button className="text-lg" size={"lg"}>
-              Check Out His Assets
-            </Button>
+            <Link href={"https://htck.github.io/bayeux/#!/"}>
+              <Button className="text-lg" size={"lg"}>
+                Check Out His Assets
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
