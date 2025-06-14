@@ -38,7 +38,7 @@ export function MusicCard({
       text: "text-base",
     },
     base: {
-      wrapper: "gap-5 py-5 px-4 text-base md:w-[450px]",
+      wrapper: "gap-5 py-5 px-4 text-base md:w-[400px]",
       heading: "text-2xl",
       icon: "size-6",
       text: "text-lg",
