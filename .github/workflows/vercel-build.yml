@@ -17,14 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Node.js with Corepack enabled
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'pnpm'
 
-      - name: Enable and prepare pnpm
-        run: corepack enable && corepack prepare pnpm@10.0.0 --activate
+      - name: Install pnpm
+        run: npm install -g pnpm@10
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
