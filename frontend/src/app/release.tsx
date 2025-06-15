@@ -1,6 +1,5 @@
 import { MusicCard } from "@/components/music/music";
 import Image from "next/image";
-
 export default function FeaturedRelease() {
   return (
     <div className="w-fit  gap-10 relative flex flex-col items-end px-4 justify-center">
