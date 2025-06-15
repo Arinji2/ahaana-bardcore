@@ -2,6 +2,8 @@
 echo " Started at $(pwd)"
 cd ..  # Move to the actual git root
 echo "📍 Working from: $(pwd)"
+ echo "Contents:"
+    ls -la
 git diff HEAD^ HEAD --quiet --exit-code -- frontend/
 if [ $? -eq 0 ]; then
   echo "🛑 No changes in frontend directory, skipping build"
