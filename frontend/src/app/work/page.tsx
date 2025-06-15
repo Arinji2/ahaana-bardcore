@@ -1,8 +1,7 @@
 import { MusicCard } from "@/components/music/music";
-import Search from "./search.client";
-import FiltersContainer from "./filter.client";
 import { Suspense } from "react";
-import { memoize } from "nextjs-better-unstable-cache";
+import FiltersContainer from "./filter.client";
+import Search from "./search.client";
 
 export default async function Page({
   searchParams,
@@ -75,8 +74,8 @@ export default async function Page({
     return sortCriteria.join(",") || "-created";
   };
 
-  //const sortString = getSortString(durationSort, createdSort, originalFilter);
-
+  const sortString = getSortString(durationSort, createdSort, originalFilter);
+  console.log(sortString, filterString);
   //const wordsRecord = await memoize(
   //  async (
   //    locPageNumber: number,
