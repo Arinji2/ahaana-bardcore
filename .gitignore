@@ -1,3 +1,4 @@
 /pb/pb_data/*
 !/pb/pb_data/.gitkeep
 !/pb/pb_data/pb
+.vercel
