@@ -44,6 +44,7 @@ func driveProxyHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "fileID parameter is required", http.StatusBadRequest)
 		return
 	}
+	fmt.Println("fileID", fileID)
 
 	client := &http.Client{
 		Timeout: 30 * time.Second,
