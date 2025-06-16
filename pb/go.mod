@@ -2,7 +2,10 @@ module github.com/arinji2/ahaana-pb
 
 go 1.23.5
 
-require github.com/pocketbase/pocketbase v0.28.3
+require (
+	github.com/joho/godotenv v1.5.1
+	github.com/pocketbase/pocketbase v0.28.3
+)
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
