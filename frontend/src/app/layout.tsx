@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Eczar } from "next/font/google";
 import "./globals.css";
 import { MusicProvider } from "@/components/music-context.client";
+import { MusicPlayer } from "@/components/player/play.client";
 
 const ecazar = Eczar({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
       >
         <MusicProvider>
           <div className="w-full min-h-screen max-w-pageMax">{children}</div>
+          <MusicPlayer />
         </MusicProvider>
       </body>
     </html>
