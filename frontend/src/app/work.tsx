@@ -2,6 +2,7 @@ import { MusicCard } from "@/components/music/music";
 import { Button } from "@/components/ui/button";
 import { MusicSchema, MusicSchemaType } from "@/lib/data";
 import { getPB } from "@/lib/pb";
+import Link from "next/link";
 import { memoize } from "nextjs-better-unstable-cache";
 
 export default async function Work() {
@@ -36,9 +37,11 @@ export default async function Work() {
             <MusicCard variant="sm" item={release} key={release.id} />
           ))}
         </div>
-        <Button className="text-lg" size={"lg"}>
-          View All
-        </Button>
+        <Link href="/work" prefetch={true}>
+          <Button className="text-lg" size={"lg"}>
+            View All
+          </Button>
+        </Link>
       </div>
     </div>
   );

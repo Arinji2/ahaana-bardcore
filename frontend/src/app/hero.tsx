@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
+import Link from "next/link";
 export default function Hero() {
   return (
     <div className=" flex flex-col items-center justify-start gap-5 w-full h-[calc(100svh-40px)]">
@@ -10,9 +10,11 @@ export default function Hero() {
       <p className="text-2xl md:text-4xl text-secondary">
         A look into my music journey
       </p>
-      <Button className="text-lg" size="lg">
-        View My Songs!
-      </Button>
+      <Link href="/work" prefetch={true}>
+        <Button className="text-lg" size="lg">
+          View My Songs!
+        </Button>
+      </Link>
       <div className="mt-auto w-full h-full relative">
         <Image
           className="object-cover md:object-contain 2xl:object-cover object-top"
