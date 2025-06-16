@@ -6,7 +6,6 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "../ui/button";
 import { X } from "lucide-react";
 
-// Helper function to format time in MM:SS
 const formatTime = (timeInSeconds: number): string => {
   if (isNaN(timeInSeconds) || !isFinite(timeInSeconds)) return "0:00";
 
@@ -23,7 +22,6 @@ export function MusicPlayer() {
   const [recentSeekTime, setRecentSeekTime] = useState<number | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
-  // Calculate position from mouse/touch event
   const getPositionFromEvent = (
     e: MouseEvent | TouchEvent | React.MouseEvent | React.TouchEvent,
   ): number => {
