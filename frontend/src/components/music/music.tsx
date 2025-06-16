@@ -81,7 +81,7 @@ export function MusicCard({
                 variantStyles.text,
               )}
             >
-              {item.isOriginal ? "Ahaana Ravishankor" : item.artists.join(",")}
+              {item.isOriginal ? "Ahaana Ravishankor" : item.artists.join(", ")}
             </p>
           </div>
           <div className="w-full h-fit flex flex-row gap-2 items-center justify-start">
@@ -99,11 +99,7 @@ export function MusicCard({
           </div>
         </div>
         <div className="w-fit shrink-0 h-full flex flex-col items-center justify-center">
-          <MusicCardClient
-            variant={variant}
-            itemID={item.id}
-            musicID={item.driveID}
-          />
+          <MusicCardClient variant={variant} data={item} />
         </div>
       </div>
     </div>
