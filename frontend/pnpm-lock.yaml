@@ -26,6 +26,9 @@ importers:
       nextjs-better-unstable-cache:
         specifier: ^1.1.0
         version: 1.1.0(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+      pocketbase:
+        specifier: ^0.26.1
+        version: 0.26.1
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -1561,6 +1564,9 @@ packages:
   picomatch@4.0.2:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
+
+  pocketbase@0.26.1:
+    resolution: {integrity: sha512-fjcPDpxyqTZCwqGUTPUV7vssIsNMqHxk9GxbhxYHPEf18RqX2d9cpSqbbHk7aas30jqkgptuKfG7aY/Mytjj3g==}
 
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
@@ -3461,6 +3467,8 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
+
+  pocketbase@0.26.1: {}
 
   possible-typed-array-names@1.1.0: {}
 
