@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, {
   useCallback,
@@ -53,14 +53,16 @@ function Sorter({
     [searchParams, sortKey, startLoading, router, pathname],
   );
 
-  useEffect(() => {
-    updateSort(sort);
-  }, [sort, updateSort]);
+  const handleClick = () => {
+    const newSort = sort === 0 ? 1 : sort === 1 ? 2 : 0;
+    setSort(newSort);
+    updateSort(newSort);
+  };
 
   return (
     <Button
       disabled={isLoading}
-      onClick={() => setSort(sort === 0 ? 1 : sort === 1 ? 2 : 0)}
+      onClick={handleClick}
       style={{ "--tw-xl-width": `${width}px` } as React.CSSProperties}
       className={cn(
         "relative flex h-[40px] w-full flex-row items-center justify-center gap-2 bg-primary px-5 py-1 text-lg font-medium text-white enabled:hover:scale-100 xl:h-auto xl:[width:var(--tw-xl-width)]",
@@ -116,11 +118,15 @@ function FilterToggle({
 
   const toggleFilter = useCallback(() => {
     const params = new URLSearchParams(searchParams);
-    if (enabled) {
-      params.delete(filterKey);
-    } else {
+    const newEnabled = !enabled;
+
+    if (newEnabled) {
       params.set(filterKey, "1");
+    } else {
+      params.delete(filterKey);
     }
+
+    setEnabled(newEnabled);
     startLoading(() => router.replace(`${pathname}?${params.toString()}`));
   }, [enabled, filterKey, searchParams, router, pathname, startLoading]);
 
@@ -144,6 +150,15 @@ function FilterToggle({
       >
         {label}
       </p>
+
+      <Check
+        className={cn(
+          "pointer-events-none will-change-transform absolute right-3 size-6 text-white opacity-0 transition-all duration-200 ease-in-out",
+          {
+            "opacity-100": enabled,
+          },
+        )}
+      />
     </Button>
   );
 }
@@ -163,8 +178,8 @@ export default function SortersContainer() {
       <Sorter
         isLoading={isPending}
         startLoading={startTransition}
-        sortKey="attempted"
-        label="Created On"
+        sortKey="releasedOn"
+        label="Released On"
         width={175}
       />
       <FilterToggle

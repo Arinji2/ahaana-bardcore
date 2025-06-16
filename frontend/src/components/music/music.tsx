@@ -1,9 +1,8 @@
+import { MusicSchemaType } from "@/lib/data";
+import { cn } from "@/lib/utils";
+import { ClassValue } from "clsx";
 import { Calendar, Disc3, UsersRound } from "lucide-react";
 import { MusicCardClient } from "./music.client";
-import { ClassValue } from "clsx";
-import { cn } from "@/lib/utils";
-import { MusicSchemaType } from "@/lib/data";
-import { isObject } from "util";
 
 export type MusicCardProps = {
   id: string;

@@ -1,6 +1,9 @@
-import { MusicCard } from "@/components/music/music";
+import { MusicSchema, MusicSchemaType } from "@/lib/data";
+import { getPB } from "@/lib/pb";
+import { memoize } from "nextjs-better-unstable-cache";
 import { Suspense } from "react";
 import FiltersContainer from "./filter.client";
+import { MusicItems } from "./items.client";
 import Search from "./search.client";
 
 export default async function Page({
@@ -9,7 +12,7 @@ export default async function Page({
   searchParams: Promise<{
     page: string | string[] | undefined;
     duration: string | string[] | undefined;
-    createdOn: string | string[] | undefined;
+    releasedOn: string | string[] | undefined;
     original: string | string[] | undefined;
     search: string | string[] | undefined;
   }>;
@@ -17,13 +20,22 @@ export default async function Page({
   let pageNumber = 1;
   let durationSort = 0;
   let createdSort = 0;
-  let originalFilter = 0;
-  let filterString = "";
 
-  const { page, original, createdOn, duration, search } = await searchParams;
+  const { page, original, releasedOn, duration, search } = await searchParams;
+  const filterConditions: string[] = [];
+
   if (search && !Array.isArray(search)) {
-    filterString = ` && real_word.word ~ "${search}"`;
+    filterConditions.push(`title ~ "${search}"`);
   }
+
+  if (original && !Array.isArray(original)) {
+    const origValue = parseInt(original);
+    if (!isNaN(origValue) && origValue === 1) {
+      filterConditions.push(`artists = ""`);
+    }
+  }
+
+  const filterString = filterConditions.join(" && ");
 
   if (duration && !Array.isArray(duration)) {
     durationSort = parseInt(duration);
@@ -32,17 +44,10 @@ export default async function Page({
     }
   }
 
-  if (createdOn && !Array.isArray(createdOn)) {
-    createdSort = parseInt(createdOn);
+  if (releasedOn && !Array.isArray(releasedOn)) {
+    createdSort = parseInt(releasedOn);
     if (isNaN(createdSort)) {
       createdSort = 0;
-    }
-  }
-
-  if (original && !Array.isArray(original)) {
-    originalFilter = parseInt(original);
-    if (isNaN(originalFilter)) {
-      originalFilter = 0;
     }
   }
 
@@ -52,11 +57,8 @@ export default async function Page({
       pageNumber = 1;
     }
   }
-  const getSortString = (
-    durationSort: number,
-    createdSort: number,
-    originalFilter: number,
-  ) => {
+
+  const getSortString = (durationSort: number, createdSort: number) => {
     const sortCriteria = [];
 
     if (durationSort !== 0) {
@@ -64,42 +66,41 @@ export default async function Page({
     }
 
     if (createdSort !== 0) {
-      sortCriteria.push(`${createdSort === 1 ? "-" : ""}created`);
+      sortCriteria.push(`${createdSort === 1 ? "-" : ""}releasedOn`);
     }
-
-    if (originalFilter !== 0) {
-      sortCriteria.push(`${originalFilter === 1 ? "-" : ""}original`);
-    }
-
-    return sortCriteria.join(",") || "-created";
+    return sortCriteria.join(",") || "-releasedOn";
   };
 
-  const sortString = getSortString(durationSort, createdSort, originalFilter);
-  console.log(sortString, filterString);
-  //const wordsRecord = await memoize(
-  //  async (
-  //    locPageNumber: number,
-  //    locUserID: string,
-  //    locFilterString: string,
-  //    locSortString: string,
-  //  ) => {
-  //    return await pb.collection("rounds").getList(locPageNumber, 10, {
-  //      filter: `game.user = "${locUserID}" && is_fake = false && real_word != ""${locFilterString}`,
-  //      expand: "real_word,game",
-  //      sort: locSortString.length > 2 ? locSortString : "-created",
-  //    });
-  //  },
-  //)(pageNumber, , filterString, sortString);
+  const sortString = getSortString(durationSort, createdSort);
+  const musicRecords = await memoize(
+    async (
+      locPageNumber: number,
+      locFilterString: string,
+      locSortString: string,
+    ) => {
+      const pb = await getPB();
+      return await pb
+        .collection("music")
+        .getList<MusicSchemaType>(locPageNumber, 10, {
+          filter: `${locFilterString}`,
+          sort: locSortString.length > 2 ? locSortString : "-pinned",
+        });
+    },
+    {
+      log: ["datacache"],
+    },
+  )(pageNumber, filterString, sortString);
 
-  //const parsedWords = wordsRecord.items
-  //  .map((word) => {
-  //    const parse = MusicSchema.safeParse(word);
-  //    if (parse.success) {
-  //      return parse.data;
-  //    }
-  //    return null;
-  //  })
-  //  .filter((word) => word !== null);
+  const parsedRecords = musicRecords.items
+    .map((record) => {
+      const parse = MusicSchema.safeParse(record);
+      if (parse.success) {
+        return parse.data;
+      }
+      return null;
+    })
+    .filter((record) => record !== null);
+
   return (
     <div className=" px-4 gap-20 flex flex-col items-center justify-start py-10">
       <div className=" flex flex-col items-center justify-start gap-5 w-full min-h-[calc(100svh-40px)]">
@@ -114,49 +115,7 @@ export default async function Page({
           </Suspense>
         </div>
 
-        <div className="w-full h-fit grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
-          <MusicCard
-            item={{
-              title: "A cool song name here which is very cool",
-              id: "1234567890",
-              duration: 120,
-              artists: ["Billy, Bobbie, Omkar :D"],
-              driveID: "1Pb6GA-BsOkIz39aBP4mALTFYoJRGJj4V",
-              featured: true,
-              releasedOn: new Date(),
-              pinned: true,
-              isOriginal: false,
-            }}
-          />
-
-          <MusicCard
-            item={{
-              title: "A cool song name here which is very cool",
-              id: "1234567890",
-              duration: 120,
-              artists: ["Billy, Bobbie, Omkar :D"],
-              driveID: "1Pb6GA-BsOkIz39aBP4mALTFYoJRGJj4V",
-              featured: true,
-              releasedOn: new Date(),
-              pinned: true,
-              isOriginal: false,
-            }}
-          />
-
-          <MusicCard
-            item={{
-              title: "A cool song name here which is very cool",
-              id: "1234567890",
-              duration: 120,
-              artists: ["Billy, Bobbie, Omkar :D"],
-              driveID: "1Pb6GA-BsOkIz39aBP4mALTFYoJRGJj4V",
-              featured: true,
-              releasedOn: new Date(),
-              pinned: true,
-              isOriginal: false,
-            }}
-          />
-        </div>
+        <MusicItems items={parsedRecords} />
       </div>
     </div>
   );
