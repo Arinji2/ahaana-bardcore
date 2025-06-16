@@ -2,6 +2,8 @@ import { Calendar, Disc3, UsersRound } from "lucide-react";
 import { MusicCardClient } from "./music.client";
 import { ClassValue } from "clsx";
 import { cn } from "@/lib/utils";
+import { MusicSchemaType } from "@/lib/data";
+import { isObject } from "util";
 
 export type MusicCardProps = {
   id: string;
@@ -26,7 +28,7 @@ export function MusicCard({
   className,
   variant = "base",
 }: {
-  item: MusicCardProps;
+  item: MusicSchemaType;
   className?: ClassValue;
   variant?: Variant;
 }) {
@@ -80,9 +82,7 @@ export function MusicCard({
                 variantStyles.text,
               )}
             >
-              {item.originalArtists
-                ? item.originalArtists.join(", ")
-                : "Ahaana Ravishankor"}
+              {item.isOriginal ? "Ahaana Ravishankor" : item.artists.join(",")}
             </p>
           </div>
           <div className="w-full h-fit flex flex-row gap-2 items-center justify-start">
@@ -95,7 +95,7 @@ export function MusicCard({
                 variantStyles.text,
               )}
             >
-              {new Date(item.dateAdded).toLocaleDateString()}
+              {new Date(item.releasedOn).toLocaleDateString()}
             </p>
           </div>
         </div>

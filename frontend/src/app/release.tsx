@@ -1,7 +1,31 @@
 import { MusicCard } from "@/components/music/music";
+import { MusicSchema, MusicSchemaType } from "@/lib/data";
+import { getPB } from "@/lib/pb";
 import Image from "next/image";
+import { memoize } from "nextjs-better-unstable-cache";
 
-export default function FeaturedRelease() {
+export default async function FeaturedRelease() {
+  const featuredReleases = await memoize(async () => {
+    const pb = await getPB();
+    const featuredReleases = await pb
+      .collection("music")
+      .getList<MusicSchemaType>(1, 1, {
+        filter: "featured=true",
+      });
+
+    const parsedFeaturedReleases = featuredReleases.items
+      .map((release) => {
+        const parse = MusicSchema.safeParse(release);
+        if (parse.success) {
+          return parse.data;
+        }
+        return null;
+      })
+      .filter((release) => release !== null) as MusicSchemaType[];
+
+    return parsedFeaturedReleases;
+  })();
+
   return (
     <div className="w-fit  gap-10 relative flex flex-col items-end px-4 justify-center">
       <h2 className="text-4xl font-bold tracking-wider text-primary">
@@ -18,17 +42,9 @@ export default function FeaturedRelease() {
         </div>
 
         <div className="w-full h-full flex flex-col items-end justify-center">
-          <MusicCard
-            item={{
-              title: "A cool song name here which is very cool",
-              id: "1234567890",
-              duration: 120,
-              originalArtists: ["Billy, Bobbie, Omkar :D"],
-              driveID: "1Pb6GA-BsOkIz39aBP4mALTFYoJRGJj4V",
-              featured: true,
-              dateAdded: new Date().toISOString(),
-            }}
-          />
+          {featuredReleases.map((release) => (
+            <MusicCard item={release} key={release.id} />
+          ))}
         </div>
       </div>
     </div>

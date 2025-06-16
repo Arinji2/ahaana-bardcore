@@ -120,34 +120,40 @@ export default async function Page({
               title: "A cool song name here which is very cool",
               id: "1234567890",
               duration: 120,
-              originalArtists: ["Billy, Bobbie, Omkar :D"],
+              artists: ["Billy, Bobbie, Omkar :D"],
               driveID: "1Pb6GA-BsOkIz39aBP4mALTFYoJRGJj4V",
               featured: true,
-              dateAdded: new Date().toISOString(),
+              releasedOn: new Date(),
+              pinned: true,
+              isOriginal: false,
             }}
           />
 
           <MusicCard
             item={{
               title: "A cool song name here which is very cool",
-              id: "234567890",
+              id: "1234567890",
               duration: 120,
-              originalArtists: ["Billy, Bobbie, Omkar :D"],
+              artists: ["Billy, Bobbie, Omkar :D"],
               driveID: "1Pb6GA-BsOkIz39aBP4mALTFYoJRGJj4V",
               featured: true,
-              dateAdded: new Date().toISOString(),
+              releasedOn: new Date(),
+              pinned: true,
+              isOriginal: false,
             }}
           />
 
           <MusicCard
             item={{
               title: "A cool song name here which is very cool",
-              id: "234567890",
+              id: "1234567890",
               duration: 120,
-              originalArtists: ["Billy, Bobbie, Omkar :D"],
+              artists: ["Billy, Bobbie, Omkar :D"],
               driveID: "1Pb6GA-BsOkIz39aBP4mALTFYoJRGJj4V",
               featured: true,
-              dateAdded: new Date().toISOString(),
+              releasedOn: new Date(),
+              pinned: true,
+              isOriginal: false,
             }}
           />
         </div>
