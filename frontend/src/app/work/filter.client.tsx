@@ -65,7 +65,7 @@ function Sorter({
       onClick={handleClick}
       style={{ "--tw-xl-width": `${width}px` } as React.CSSProperties}
       className={cn(
-        "relative flex h-[40px] w-full flex-row items-center justify-center gap-2 bg-primary px-5 py-1 text-lg font-medium text-white enabled:hover:scale-100 xl:h-auto xl:[width:var(--tw-xl-width)]",
+        "relative flex h-[40px] w-full border-2 border-black flex-row items-center justify-center gap-2 bg-primary px-5 py-1 text-lg font-medium text-white enabled:hover:scale-100 xl:h-auto xl:[width:var(--tw-xl-width)]",
         {
           "bg-secondary/80": sort === 0,
         },
@@ -136,7 +136,7 @@ function FilterToggle({
       onClick={toggleFilter}
       style={{ "--tw-xl-width": `${width}px` } as React.CSSProperties}
       className={cn(
-        "relative flex h-[40px] w-full scale-100 flex-row items-center justify-center gap-2 bg-primary px-5 py-1 text-lg font-medium text-white enabled:hover:scale-100 xl:h-auto xl:[width:var(--tw-xl-width)]",
+        "relative border-2 border-black flex h-[40px] w-full scale-100 flex-row items-center justify-center gap-2 bg-primary px-5 py-1 text-lg font-medium text-white enabled:hover:scale-100 xl:h-auto xl:[width:var(--tw-xl-width)]",
         {
           "bg-secondary/80": !enabled,
         },
