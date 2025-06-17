@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useMusic } from "../music-context.client";
-import { MusicCardClient } from "../music/music.client";
+import { MusicCardClient } from "../music/track.client";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "../ui/button";
 import { X } from "lucide-react";
@@ -117,7 +117,7 @@ export function MusicPlayer() {
   return (
     <div
       className={cn(
-        "transition-all ease-in-out py-2 duration-300 will-change-transform w-full fixed bottom-0 left-0 z-50 h-[120px] md:h-[130px] bg-primary flex flex-col items-center justify-center translate-y-full",
+        "transition-all ease-in-out py-4 duration-300 will-change-transform w-full fixed bottom-0 left-0 z-50 h-[120px] md:h-[130px] bg-primary flex flex-col items-center justify-center translate-y-full",
         {
           "translate-y-0": recordData,
         },
@@ -154,7 +154,7 @@ export function MusicPlayer() {
             <p className="text-lg md:text-xl text-white line-clamp-1 w-full text-left font-bold ">
               {recordData?.title}
             </p>
-            <p className="text-base md:text-lg text-offwhite font-medium ">
+            <p className="text-base line-clamp-1 md:text-lg text-offwhite font-medium ">
               {recordData?.isOriginal
                 ? "Ahaana Ravishankor"
                 : recordData?.artists.join(", ")}
