@@ -4,8 +4,8 @@ import { Loader2 } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
-export default function Search() {
-  const [inputSearch, setInputSearch] = useState("");
+export default function Search({ search }: { search: string }) {
+  const [inputSearch, setInputSearch] = useState(search ?? "");
   const [value] = useDebounce(inputSearch, 1000);
 
   const searchParams = useSearchParams();

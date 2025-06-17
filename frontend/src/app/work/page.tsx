@@ -113,7 +113,7 @@ export default async function Page({
 
         <div className="flex h-fit w-full flex-col items-stretch justify-center gap-4 xl:flex-row">
           <Suspense fallback={<div>Loading...</div>}>
-            <Search />
+            <Search search={search as string} />
             <FiltersContainer />
           </Suspense>
         </div>
