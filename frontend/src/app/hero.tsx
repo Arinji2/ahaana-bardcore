@@ -21,6 +21,7 @@ export default function Hero() {
           src="/hero.png"
           alt="Hero"
           fill
+          priority
         />
       </div>
     </div>
