@@ -6,6 +6,8 @@ import FiltersContainer from "./filter.client";
 import { MusicItems } from "./items.client";
 import Search from "./search.client";
 import Pagination from "./pagination.client";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function Page({
   searchParams,
@@ -121,6 +123,11 @@ export default async function Page({
           pageNumber={pageNumber}
           totalPages={musicRecords.totalPages}
         />
+        <Button variant="link" className="mt-4">
+          <Link href="/" className="text-2xl font-medium">
+            Go back to Home
+          </Link>
+        </Button>
       </div>
     </div>
   );
