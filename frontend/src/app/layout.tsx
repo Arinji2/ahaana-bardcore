@@ -10,7 +10,8 @@ const ecazar = Eczar({
 
 export const metadata: Metadata = {
   title: "Ahaana Ravishankor",
-  description: "A look into my music journey and all of my work :D",
+  description:
+    "Hey there! I'm a college student on a musical adventure. Pop culture's grown on me but I don't stick to one genre. Its just me and my guitars against the world- unless you're down to join the ride. Welcome to my corner! :)",
   appleWebApp: {
     title: "Ahaana Portfolio",
   },
