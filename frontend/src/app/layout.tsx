@@ -9,11 +9,15 @@ const ecazar = Eczar({
 });
 
 export const metadata: Metadata = {
-  title: "Ahaana Portfolio",
+  title: "Ahaana Ravishankor",
   description: "A look into my music journey and all of my work :D",
   appleWebApp: {
     title: "Ahaana Portfolio",
   },
+  metadataBase: new URL(
+    "/",
+    process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
+  ),
 };
 
 export default function RootLayout({
