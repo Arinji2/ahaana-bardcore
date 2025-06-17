@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import FiltersContainer from "./filter.client";
 import { MusicItems } from "./items.client";
 import Search from "./search.client";
+import Pagination from "./pagination.client";
 
 export default async function Page({
   searchParams,
@@ -116,6 +117,10 @@ export default async function Page({
         </div>
 
         <MusicItems items={parsedRecords} />
+        <Pagination
+          pageNumber={pageNumber}
+          totalPages={musicRecords.totalPages}
+        />
       </div>
     </div>
   );
