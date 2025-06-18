@@ -9,7 +9,10 @@ const ecazar = Eczar({
 });
 
 export const metadata: Metadata = {
-  title: "Ahaana Ravishankor",
+  title: {
+    default: "Ahaana Ravishankor",
+    template: "%s | Ahaana Ravishankor",
+  },
   description:
     "Hey there! I'm a college student on a musical adventure. Pop culture's grown on me but I don't stick to one genre. Its just me and my guitars against the world- unless you're down to join the ride. Welcome to my corner! :)",
   appleWebApp: {
@@ -21,6 +24,9 @@ export const metadata: Metadata = {
       "/",
       process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
     ),
+  },
+  alternates: {
+    canonical: "./",
   },
   keywords: [
     "Ahaana",
