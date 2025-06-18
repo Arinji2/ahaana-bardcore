@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Eczar } from "next/font/google";
 import "./globals.css";
 import { MusicProvider } from "@/components/music-context.client";
@@ -19,6 +19,10 @@ export const metadata: Metadata = {
     "/",
     process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
   ),
+};
+
+export const viewport: Viewport = {
+  themeColor: "#5e503f",
 };
 
 export default function RootLayout({
