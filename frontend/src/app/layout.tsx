@@ -18,6 +18,13 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Ahaana Ravishankor",
   },
+  keywords: [
+    "Ahaana",
+    "Ravishankor",
+    "Ahaana Ravishankor",
+    "Ahaana Ravishankor Music",
+    "Student Musician",
+  ],
   metadataBase: new URL(
     "/",
     process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
