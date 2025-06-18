@@ -8,7 +8,12 @@ import Search from "./search.client";
 import Pagination from "./pagination.client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  description:
+    "This is all of my music. I love making covers and adding my own flair to these classics. You can check out and listen to all of my songs directly from this page :D",
+};
 export default async function Page({
   searchParams,
 }: {
