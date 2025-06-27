@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Turnstile from "react-turnstile";
+import { SendResponseEmail } from "./contact.action";
 
 export default function Contact() {
   const [showChallenge, setShowChallenge] = useState(false);
@@ -29,14 +30,15 @@ export default function Contact() {
     setShowChallenge(true);
   };
 
-  const handleTokenVerified = (token: string) => {
+  const handleTokenVerified = async () => {
     setShowChallenge(false);
 
-    console.log("Form submitted with token:");
-    console.log({ ...formData, turnstileToken: token });
-
-    // Handle the actual form submission here
-    // Reset form after successful submission
+    await SendResponseEmail(
+      formData.name,
+      formData.email,
+      formData.subject,
+      formData.message,
+    );
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
