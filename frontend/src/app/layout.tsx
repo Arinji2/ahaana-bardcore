@@ -3,6 +3,7 @@ import { Eczar } from "next/font/google";
 import "./globals.css";
 import { MusicProvider } from "@/components/music-context.client";
 import { MusicPlayer } from "@/components/player/play.client";
+import Script from "next/script";
 
 const ecazar = Eczar({
   subsets: ["latin"],
@@ -52,6 +53,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script
+        src="https://analytics.arinji.com/script.js"
+        data-website-id={process.env.ANALYTICS_ID}
+        strategy="afterInteractive"
+      />
       <body
         className={`${ecazar.className} tracking-wider antialiased bg-[url('/backdrop.png')] flex flex-col items-center justify-center bg-repeat w-full min-h-screen`}
         style={{ backgroundSize: "auto" }}

@@ -69,6 +69,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.1.5(@types/react@19.1.6)
+      '@types/umami':
+        specifier: ^2.10.0
+        version: 2.10.0
       eslint:
         specifier: ^9
         version: 9.28.0(jiti@2.4.2)
@@ -519,6 +522,9 @@ packages:
 
   '@types/react@19.1.6':
     resolution: {integrity: sha512-JeG0rEWak0N6Itr6QUx+X60uQmN+5t3j9r/OVDtWzFXKaj6kD1BwJzOksD0FF6iWxZlbE1kB0q9vtnU2ekqa1Q==}
+
+  '@types/umami@2.10.0':
+    resolution: {integrity: sha512-iWcs1KkcO3ooIi2rR9M5drmpQzlsT+sFiyWElIGmVwjdGlp+vQmy/VYIChYnF5ETqx7KrL80JfSkroS6dm37Hg==}
 
   '@typescript-eslint/eslint-plugin@8.33.0':
     resolution: {integrity: sha512-CACyQuqSHt7ma3Ns601xykeBK/rDeZa3w6IS6UtMQbixO5DWy+8TilKkviGDH6jtWCo8FGRKEK5cLLkPvEammQ==}
@@ -2254,6 +2260,8 @@ snapshots:
   '@types/react@19.1.6':
     dependencies:
       csstype: 3.1.3
+
+  '@types/umami@2.10.0': {}
 
   '@typescript-eslint/eslint-plugin@8.33.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3)':
     dependencies:

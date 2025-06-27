@@ -55,9 +55,15 @@ export const MusicProvider = ({ children }: { children: React.ReactNode }) => {
         audio.load();
         await audio.play();
         setIsPlaying(true);
+        window.umami.track("music-play", {
+          song: recordData.title,
+        });
       } catch (error) {
         console.error("Error playing audio:", error);
         setRecordData(null);
+        window.umami.track("music-error", {
+          song: recordData.title,
+        });
       } finally {
         setIsLoading(false);
       }
@@ -81,6 +87,9 @@ export const MusicProvider = ({ children }: { children: React.ReactNode }) => {
       setRecordData(null);
       setIsPlaying(false);
       setCurrentTime(0);
+      window.umami.track("music-finish", {
+        song: recordData?.title,
+      });
     };
     const handleError = (e: Event) => {
       console.error("Audio error:", e);
@@ -108,7 +117,7 @@ export const MusicProvider = ({ children }: { children: React.ReactNode }) => {
       audio.removeEventListener("ended", handleEnded);
       audio.removeEventListener("error", handleError);
     };
-  }, []);
+  }, [recordData?.title]);
 
   const play = async () => {
     const audio = audioRef.current;
@@ -116,6 +125,9 @@ export const MusicProvider = ({ children }: { children: React.ReactNode }) => {
 
     try {
       await audio.play();
+      window.umami.track("music-play", {
+        song: recordData.title,
+      });
     } catch (error) {
       console.error("Error playing audio:", error);
     }
@@ -125,6 +137,9 @@ export const MusicProvider = ({ children }: { children: React.ReactNode }) => {
     const audio = audioRef.current;
     if (!audio) return;
     audio.pause();
+    window.umami.track("music-pause", {
+      song: recordData?.title,
+    });
   };
 
   const toggle = () => {
@@ -139,6 +154,10 @@ export const MusicProvider = ({ children }: { children: React.ReactNode }) => {
     const audio = audioRef.current;
     if (!audio) return;
     audio.currentTime = time;
+    window.umami.track("music-seek", {
+      song: recordData?.title,
+      time: time,
+    });
   };
 
   return (
