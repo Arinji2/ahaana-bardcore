@@ -4,6 +4,7 @@ import "./globals.css";
 import { MusicProvider } from "@/components/music-context.client";
 import { MusicPlayer } from "@/components/player/play.client";
 import Script from "next/script";
+import { Toaster } from "@/components/ui/sonner";
 
 const ecazar = Eczar({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default function RootLayout({
         className={`${ecazar.className} tracking-wider antialiased bg-[url('/backdrop.png')] flex flex-col items-center justify-center bg-repeat w-full min-h-screen`}
         style={{ backgroundSize: "auto" }}
       >
+        <Toaster />
         <MusicProvider>
           <div className="w-full min-h-screen max-w-pageMax">{children}</div>
           <MusicPlayer />

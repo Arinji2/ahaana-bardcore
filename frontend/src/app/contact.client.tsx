@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Turnstile from "react-turnstile";
 import { SendResponseEmail } from "./contact.action";
+import { toast } from "sonner";
 
 export default function Contact() {
   const [showChallenge, setShowChallenge] = useState(false);
@@ -33,12 +34,19 @@ export default function Contact() {
   const handleTokenVerified = async () => {
     setShowChallenge(false);
 
-    await SendResponseEmail(
+    const result = await SendResponseEmail(
       formData.name,
       formData.email,
       formData.subject,
       formData.message,
     );
+    if (result) {
+      toast.success("Successfully sent email", {
+        description: "You will receive a response shortly :D",
+      });
+    } else {
+      toast.error("Failed to send email");
+    }
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
