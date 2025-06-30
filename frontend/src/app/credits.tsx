@@ -10,7 +10,7 @@ export default function Credits() {
           <p className="text-2xl font-medium text-center tracking-wider">
             Website designed and built by Arinji
           </p>
-          <Link href={"https://arinji.com"}>
+          <Link target="_blank" href={"https://arinji.com"}>
             <Button className="text-lg" size={"lg"}>
               Check Out My Portfolio
             </Button>
@@ -23,7 +23,7 @@ export default function Credits() {
             <p className="text-2xl font-medium tracking-wider">
               Assets from Bayeux
             </p>
-            <Link href={"https://htck.github.io/bayeux/#!/"}>
+            <Link target="_blank" href={"https://htck.github.io/bayeux/#!/"}>
               <Button className="text-lg" size={"lg"}>
                 Check Out His Assets
               </Button>
