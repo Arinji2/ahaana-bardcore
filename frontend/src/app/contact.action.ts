@@ -42,7 +42,7 @@ export async function SendNotificationEmail(
   try {
     const { error } = await resend.emails.send({
       from: "Ahaana <ahaana@mail.arinji.com>",
-      to: [process.env.AHAANA_EMAIL!],
+      to: [process.env.AHAANA_EMAIL!, "arinjaydhar205@gmail.com"],
       subject: "Hey cutie, someone just reached out to you :D",
       react: Notify({ name, email, subject, body }),
     });
