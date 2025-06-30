@@ -38,6 +38,23 @@ export const MusicProvider = ({ children }: { children: React.ReactNode }) => {
   const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key === " ") {
+      toggle();
+    }
+    if (event.key === "Escape") {
+      pause();
+      setIsPlaying(false);
+      setRecordData(null);
+    }
+  }
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
   // Load new track when recordData changes
   useEffect(() => {
     const audio = audioRef.current;
